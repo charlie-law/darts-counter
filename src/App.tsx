@@ -2,14 +2,13 @@ import './App.css'
 import { useState } from "react";
 import Game from "./components/game";
 import Title from "./components/Title";
+import GameTypeRadio from "./components/GameTypeRadio";
 
 export default function App() {
     const [gameActive, setGameActive] = useState(false);
-    const [selectedGameType, setSelectedGameType] = useState(301);
 
     function onSubmit(formData: FormData) {
-        console.log(formData)
-        const gameType = formData.get("option");
+        const gameType = document.querySelector('.game-type[aria-pressed="true"]')?.getAttribute("value");
         const player1Name = formData.get("player-1");
         const player2Name = formData.get("player-2");
 
@@ -35,11 +34,7 @@ export default function App() {
                             <input type="text" id="player-2" name="player-2" maxLength={40} placeholder="Player 2's Name" className="w-full p-2 border bg-gray-100 border-gray-400 rounded focus:outline-1 focus:outline-red-600" required />
                         </section>
                     </section>
-                    <section className="flex w-full gap-8">
-                        <button onClick={() => {setSelectedGameType(301)}} type="button" value="301" className="bg-gray-100 border border-gray-400 rounded hover:bg-red-100 hover:border-red-400 font-semibold text-4xl peer-checked:bg-red-200 peer-checked:border-red-600 game-type flex-1">301</button>
-                        <button onClick={() => {setSelectedGameType(301)}} type="button" value="501" className="bg-gray-100 border border-gray-400 rounded hover:bg-red-100 hover:border-red-400 font-semibold text-4xl peer-checked:bg-red-200 peer-checked:border-red-600 game-type flex-1">501</button>
-                        <button onClick={() => {setSelectedGameType(301)}} type="button" value="701" className="bg-gray-100 border border-gray-400 rounded hover:bg-red-100 hover:border-red-400 font-semibold text-4xl peer-checked:bg-red-200 peer-checked:border-red-600 game-type flex-1">701</button>
-                    </section>
+                    <GameTypeRadio />
                     <button type="submit" className="w-full text-white bg-red-800 rounded text-2xl p-2 cursor-pointer hover:bg-red-900 transition delay-75">Start Game</button>
                 </form>
             );
