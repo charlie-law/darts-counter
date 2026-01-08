@@ -30,6 +30,29 @@ body {
     transition-duration: 250ms;
 }
 
+.number-button {
+    cursor: pointer;
+    padding: 12px;
+    transition: all;
+    transition-duration: 250ms;
+    border: solid 1px #99a1af;
+    background-color: #f3f4f6;
+    border-radius: 6px;
+    font-size: large;
+}
+
+.number-button:hover {
+    border: solid 1px oklch(70.4% 0.191 22.216);
+    background-color: oklch(93.6% 0.032 17.717);
+    color: oklch(57.7% 0.245 27.325);
+}
+
+.number-button[aria-pressed="true"] {
+    border: solid 1px oklch(57.7% 0.245 27.325);
+    background-color: oklch(88.5% 0.062 18.334);
+    color: oklch(44.4% 0.177 26.899);
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -1,14 +1,18 @@
 export default class Game {
-    playerStartScore: number;
+    playerStartScore: number; // The score that players start with
     names = {
         1: "",
         2: ""
     };
-    scores = {
+    scores = { // Current scores of the players
         1: 0,
         2: 0
     };
-    turn: number;
+    legs = { // Total games won
+        1: 0,
+        2: 0
+    }
+    turn: number; // Current player's turn
 
     constructor(playerStartScore: number, player1Name: string, player2Name: string) {
         this.playerStartScore = playerStartScore;

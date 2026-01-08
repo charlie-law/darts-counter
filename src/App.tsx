@@ -3,23 +3,50 @@ import { useState } from "react";
 import Game from "./components/game";
 import Title from "./components/Title";
 import GameTypeRadio from "./components/GameTypeRadio";
+import InputTypeRadio from "./components/InputTypeRadio";
 
 export default function App() {
     const [gameActive, setGameActive] = useState(false);
+    const [gameInfo, setGameInfo] = useState<{[index: string]: string}>({});
 
     function onSubmit(formData: FormData) {
-        const gameType = document.querySelector('.game-type[aria-pressed="true"]')?.getAttribute("value");
+        const gameType = String(document.querySelector('.game-type[aria-pressed="true"]')?.getAttribute("value")); // Get value of selected game type
         const player1Name = formData.get("player-1");
         const player2Name = formData.get("player-2");
 
         const newGame = new Game(Number(gameType), String(player1Name), String(player2Name));
         console.log(newGame)
-        setGameActive(true);
+
+        const gameInfoObject: {[index: string]: string} = {
+            "player1": String(player1Name),
+            "player2": String(player2Name),
+            "gameType": gameType,
+            "player1Score": gameType,
+            "player2Score": gameType
+        };
+        setGameInfo(gameInfoObject);
+
+        setGameActive(true); // Set game active to show game info page
     };
 
     function AppContent() {
         if (gameActive) {
-            return (<h1>Game</h1>)
+            return (
+                <section className="flex flex-col gap-16">
+                    <section className="flex gap-8">
+                        <section className="flex flex-col gap-2 items-center flex-1">
+                            <h2 className="text-7xl font-bold">{gameInfo["player1Score"]}</h2>
+                            <p className="text-lg">{gameInfo["player1"]}</p>
+                        </section>
+                        <div className="bg-gray-400 w-px"></div>
+                        <section className="flex flex-col gap-2 items-center flex-1">
+                            <h2 className="text-7xl font-bold">{gameInfo["player2Score"]}</h2>
+                            <p className="text-lg">{gameInfo["player2"]}</p>
+                        </section>
+                    </section>
+                    <InputTypeRadio />
+                </section>
+            );
         } else {
             return (
                 <form onSubmit={(e) => {const formData = new FormData(e.currentTarget); onSubmit(formData)}} className="flex flex-col gap-5 items-start">
