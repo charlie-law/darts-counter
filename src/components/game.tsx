@@ -11,7 +11,7 @@ export default class Game {
     legs: {[index: number]: number} = { // Total games won
         1: 0,
         2: 0
-    }
+    };
     turn: number; // Current player's turn
     currentScored: {[index: string]: number}[] = [];
 
@@ -79,16 +79,22 @@ export default class Game {
         let totalPoints = this.calculateTotalCurrentScored();
         let potentialScore = this.calculatePotentialScore();
 
-        console.log(Object.keys(this.currentScored[this.currentScored.length-1])[0][0])
-
         if (potentialScore > 1) { // Check that the potential score is greater than one to avoid points dropping below allowed scores. 
             this.scores[this.turn] -= totalPoints; // Remove points from player's score
         } else if (potentialScore == 0 && Object.keys(this.currentScored[this.currentScored.length-1])[0][0] == "D") { // Check that the potential score is equal to zero for a potential win.
             alert(`${this.names[this.turn]} has won the game!`);
+            this.resetGame(this.turn);
+            this.currentScored = []; // Clear current scores array
+            return;
         };
 
         this.currentScored = []; // Clear current scores array
         this.turn == 1? this.turn = 2 : this.turn = 1; // Change the turn
+    };
 
+    resetGame(prevWinner: number) {
+        this.scores[1] = this.playerStartScore;
+        this.scores[2] = this.playerStartScore;
+        this.turn = prevWinner;
     };
 };
