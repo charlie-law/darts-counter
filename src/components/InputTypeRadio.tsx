@@ -2,7 +2,7 @@ import { useState } from "react";
 import Game from "./game";
 
 export default function InputTypeRadio({ game }: {game: Game}) {
-    const [selectedInputType, setSelectedInputType] = useState<number>(0);
+    const [selectedInputType, setSelectedInputType] = useState<number>(1);
     const [selectedType, setSelectedType] = useState<string | null>(null);
 
     function handleInput(number: number | null, type: string | null) {
@@ -42,33 +42,31 @@ export default function InputTypeRadio({ game }: {game: Game}) {
     };
 
     function Numbers() {
-        if (selectedType != "DB" && selectedType != "SB") {
-            return (
-                <section className="flex-1 flex flex-wrap flex-col gap-2 max-h-160">
-                    <NumButton num={20} />
-                    <NumButton num={19} />
-                    <NumButton num={18} />
-                    <NumButton num={17} />
-                    <NumButton num={16} />
-                    <NumButton num={15} />
-                    <NumButton num={14} />
-                    <NumButton num={13} />
-                    <NumButton num={12} />
-                    <NumButton num={11} />
-                    <NumButton num={10} />
-                    <NumButton num={9} />
-                    <NumButton num={8} />
-                    <NumButton num={7} />
-                    <NumButton num={6} />
-                    <NumButton num={5} />
-                    <NumButton num={4} />
-                    <NumButton num={3} />
-                    <NumButton num={2} />
-                    <NumButton num={1} />
-                </section>
-            );
-        };
-    }
+        return (
+            <section className="flex-1 flex flex-wrap flex-col gap-2 max-h-160">
+                <NumButton num={20} />
+                <NumButton num={19} />
+                <NumButton num={18} />
+                <NumButton num={17} />
+                <NumButton num={16} />
+                <NumButton num={15} />
+                <NumButton num={14} />
+                <NumButton num={13} />
+                <NumButton num={12} />
+                <NumButton num={11} />
+                <NumButton num={10} />
+                <NumButton num={9} />
+                <NumButton num={8} />
+                <NumButton num={7} />
+                <NumButton num={6} />
+                <NumButton num={5} />
+                <NumButton num={4} />
+                <NumButton num={3} />
+                <NumButton num={2} />
+                <NumButton num={1} />
+            </section>
+        );
+    };
 
     function NumberTypes() {
         return (
@@ -76,8 +74,8 @@ export default function InputTypeRadio({ game }: {game: Game}) {
                 <section className="flex flex-col gap-2 flex-1">
                     <button className="number-button" value={50} onClick={() => {setSelectedType("DB"); handleInput(null, "DB")}} aria-pressed={selectedType == "DB"}>DB</button>
                     <button className="number-button" value={25} onClick={() => {setSelectedType("SB"); handleInput(null, "SB")}} aria-pressed={selectedType == "SB"}>SB</button>
-                    <button className="number-button" onClick={() => {setSelectedType("TRIPLE")}} aria-pressed={selectedType == "TRIPLE"}>TRIPLE</button>
-                    <button className="number-button" onClick={() => {setSelectedType("DOUBLE")}} aria-pressed={selectedType == "DOUBLE"}>DOUBLE</button>
+                    <button className="number-button" onClick={() => {selectedType == "TRIPLE"? setSelectedType(null) : setSelectedType("TRIPLE")}} aria-pressed={selectedType == "TRIPLE"}>TREBLE</button>
+                    <button className="number-button" onClick={() => {selectedType == "DOUBLE"? setSelectedType(null) : setSelectedType("DOUBLE")}} aria-pressed={selectedType == "DOUBLE"}>DOUBLE</button>
                     <button className="number-button" onClick={() => {setSelectedType("MISS"); handleInput(0, "MISS")}} aria-pressed={selectedType == "MISS"}>MISS</button>
                 </section>
                 <Numbers />
