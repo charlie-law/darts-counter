@@ -89,5 +89,6 @@ export default class Game {
 
         this.currentScored = []; // Clear current scores array
         this.turn == 1? this.turn = 2 : this.turn = 1; // Change the turn
+
     };
 };

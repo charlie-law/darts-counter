@@ -1,4 +1,3 @@
-import './App.css'
 import { useState } from "react";
 import Game from "./components/game";
 import Title from "./components/Title";
@@ -27,13 +26,13 @@ export default function App() {
                         <section className="flex flex-col gap-1 items-center flex-1">
                             <h2 className="text-7xl font-bold">{game.scores[1]}</h2>
                             <p className="text-gray-500" id="potential-1"></p>
-                            <p className="text-lg">{game.names[1]}</p>
+                            <p className="text-lg">{game.turn == 1? `💠 ${game.names[1]}` : game.names[1]}</p>
                         </section>
                         <div className="bg-gray-400 w-px"></div>
                         <section className="flex flex-col gap-1 items-center flex-1">
                             <h2 className="text-7xl font-bold">{game.scores[2]}</h2>
                             <p className="text-gray-500" id="potential-2"></p>
-                            <p className="text-lg">{game.names[2]}</p>
+                            <p className="text-lg">{game.turn == 2? `💠 ${game.names[2]}` : game.names[2]}</p>
                         </section>
                     </section>
                     <section className="flex flex-col gap-4 items-center">
