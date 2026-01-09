@@ -16,8 +16,6 @@ export default function App() {
         const player2Name = formData.get("player-2");
 
         setGame(new Game(Number(gameType), String(player1Name), String(player2Name)));
-        console.log(game);
-
         setGameActive(true); // Set game active to show game info page
     };
 
@@ -26,13 +24,15 @@ export default function App() {
             return (
                 <section className="flex flex-col gap-16">
                     <section className="flex gap-8">
-                        <section className="flex flex-col gap-2 items-center flex-1">
+                        <section className="flex flex-col gap-1 items-center flex-1">
                             <h2 className="text-7xl font-bold">{game.scores[1]}</h2>
+                            <p className="text-gray-500" id="potential-1"></p>
                             <p className="text-lg">{game.names[1]}</p>
                         </section>
                         <div className="bg-gray-400 w-px"></div>
-                        <section className="flex flex-col gap-2 items-center flex-1">
+                        <section className="flex flex-col gap-1 items-center flex-1">
                             <h2 className="text-7xl font-bold">{game.scores[2]}</h2>
+                            <p className="text-gray-500" id="potential-2"></p>
                             <p className="text-lg">{game.names[2]}</p>
                         </section>
                     </section>
