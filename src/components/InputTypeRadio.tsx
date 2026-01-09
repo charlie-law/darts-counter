@@ -78,6 +78,7 @@ export default function InputTypeRadio({ game }: {game: Game}) {
                     <button className="number-button" value={25} onClick={() => {setSelectedType("SB"); handleInput(null, "SB")}} aria-pressed={selectedType == "SB"}>SB</button>
                     <button className="number-button" onClick={() => {setSelectedType("TRIPLE")}} aria-pressed={selectedType == "TRIPLE"}>TRIPLE</button>
                     <button className="number-button" onClick={() => {setSelectedType("DOUBLE")}} aria-pressed={selectedType == "DOUBLE"}>DOUBLE</button>
+                    <button className="number-button" onClick={() => {setSelectedType("MISS"); handleInput(0, "MISS")}} aria-pressed={selectedType == "MISS"}>MISS</button>
                 </section>
                 <Numbers />
             </section>
