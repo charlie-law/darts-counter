@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Game from "./components/game";
 import Title from "./components/Title";
 import GameTypeRadio from "./components/GameTypeRadio";
@@ -8,19 +8,20 @@ import InputTypeRadio from "./components/InputTypeRadio";
 export default function App() {
     const [gameActive, setGameActive] = useState(false);
     const [gameInfo, setGameInfo] = useState<{[index: string]: string}>({});
+    const game = useRef<Game>(new Game(301, "Player 1", "Player 2"));
 
     function onSubmit(formData: FormData) {
         const gameType = String(document.querySelector('.game-type[aria-pressed="true"]')?.getAttribute("value")); // Get value of selected game type
         const player1Name = formData.get("player-1");
         const player2Name = formData.get("player-2");
 
-        const newGame = new Game(Number(gameType), String(player1Name), String(player2Name));
-        console.log(newGame)
+        game.current = new Game(Number(gameType), String(player1Name), String(player2Name));
+        console.log(game.current);
 
         const gameInfoObject: {[index: string]: string} = {
             "player1": String(player1Name),
             "player2": String(player2Name),
-            "gameType": gameType,
+            "gameType": gameType,   
             "player1Score": gameType,
             "player2Score": gameType
         };
@@ -36,15 +37,33 @@ export default function App() {
                     <section className="flex gap-8">
                         <section className="flex flex-col gap-2 items-center flex-1">
                             <h2 className="text-7xl font-bold">{gameInfo["player1Score"]}</h2>
-                            <p className="text-lg">{gameInfo["player1"]}</p>
+                            <p className="text-lg">{game.current.names[1]}</p>
                         </section>
                         <div className="bg-gray-400 w-px"></div>
                         <section className="flex flex-col gap-2 items-center flex-1">
                             <h2 className="text-7xl font-bold">{gameInfo["player2Score"]}</h2>
-                            <p className="text-lg">{gameInfo["player2"]}</p>
+                            <p className="text-lg">{game.current.names[2]}</p>
                         </section>
                     </section>
-                    <InputTypeRadio />
+                    <section className="flex flex-col gap-4 items-center">
+                        <h3>CURRENT SCORE</h3>
+                        <section className="flex gap-8 w-full">
+                            <section className="bg-gray-50 rounded border border-gray-200 p-2 flex-1">
+                                <h4 className="font-medium text-4xl">{game.current.currentScored[0]? game.current.currentScored[0].key : "-"}</h4>
+                                <p className="text-xl">{game.current.currentScored[0]? game.current.currentScored[0].value : 0}</p>
+                            </section>
+                            <section className="bg-gray-50 rounded border border-gray-200 p-2 flex-1">
+                                <h4 className="font-medium text-4xl">{game.current.currentScored[1]? game.current.currentScored[1].key : "-"}</h4>
+                                <p className="text-xl">{game.current.currentScored[1]? game.current.currentScored[1].value : 0}</p>
+                            </section>
+                            <section className="bg-gray-50 rounded border border-gray-200 p-2 flex-1">
+                                <h4 className="font-medium text-4xl">{game.current.currentScored[2]? game.current.currentScored[2].key : "-"}</h4>
+                                <p className="text-xl">{game.current.currentScored[2]? game.current.currentScored[2].value : 0}</p>
+                            </section>
+                        </section>
+                        <button className="p-2 px-4 rounded bg-red-200 hover:bg-red-300 transition duration-250 w-fit cursor-pointer hidden">Confirm Score</button>
+                    </section>
+                    <InputTypeRadio game={game.current} />
                 </section>
             );
         } else {
