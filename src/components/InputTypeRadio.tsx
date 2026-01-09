@@ -3,19 +3,23 @@ import Game from "./game";
 
 export default function InputTypeRadio({ game }: {game: Game}) {
     const [selectedInputType, setSelectedInputType] = useState<number>(0);
-    const [currentPoints, setCurrentPoints] = useState<number[]>([]);
     const [selectedType, setSelectedType] = useState<string | null>(null);
 
-    function handleInput(number: number | null) {
-        const type: string | null = selectedType;
+    function handleInput(number: number | null, type: string | null) {
         if (number) {
+            let type = selectedType;
             const points = type == "SINGLE"? number : type == "DOUBLE"? number * 2 : type == "TRIPLE"? number * 3 : 0;
-            setCurrentPoints([...currentPoints, points]);
-            game.changeScore(currentPoints);
+            const stringPoints = type == "SINGLE"? number : type == "DOUBLE"? `D${number}` : type == "TRIPLE"? `T${number}` : 0;
+            game.addToCurrentScored({[stringPoints as string]: points});
+            console.log(game.currentScored)
+            setSelectedType(null);
         } else {
-            const points = type == "BULLSEYE"? 50 : type == "SB"? 25 : 0;
-            setCurrentPoints([...currentPoints, points]);
-            game.changeScore(currentPoints);
+            if (type) {
+                const points = type == "DB"? 50 : type == "SB"? 25 : 0;
+                game.addToCurrentScored({[type as string]: points});
+                console.log(game.currentScored)
+                setSelectedType(null);
+            };
         };
     };
 
@@ -34,11 +38,11 @@ export default function InputTypeRadio({ game }: {game: Game}) {
     };
 
     function NumButton({ num }: { num: number }) {
-        return <button className="number-button" value={num} onClick={() => handleInput(num)}>{num}</button>
+        return <button className="number-button" value={num} onClick={() => handleInput(num, null)}>{num}</button>
     };
 
     function Numbers() {
-        if (selectedType != "BULLSEYE" && selectedType != "SB") {
+        if (selectedType != "DB" && selectedType != "SB") {
             return (
                 <section className="flex-1 flex flex-wrap flex-col gap-2 max-h-160">
                     <NumButton num={20} />
@@ -70,8 +74,8 @@ export default function InputTypeRadio({ game }: {game: Game}) {
         return (
             <section className="flex w-full gap-4 mt-8">
                 <section className="flex flex-col gap-2 flex-1">
-                    <button className="number-button" value={50} onClick={() => {setSelectedType("BULLSEYE"); handleInput(null)}} aria-pressed={selectedType == "BULLSEYE"}>BULLSEYE</button>
-                    <button className="number-button" value={25} onClick={() => {setSelectedType("SB"); handleInput(null)}} aria-pressed={selectedType == "SB"}>SB</button>
+                    <button className="number-button" value={50} onClick={() => {setSelectedType("DB"); handleInput(null, "DB")}} aria-pressed={selectedType == "DB"}>DB</button>
+                    <button className="number-button" value={25} onClick={() => {setSelectedType("SB"); handleInput(null, "SB")}} aria-pressed={selectedType == "SB"}>SB</button>
                     <button className="number-button" onClick={() => {setSelectedType("TRIPLE")}} aria-pressed={selectedType == "TRIPLE"}>TRIPLE</button>
                     <button className="number-button" onClick={() => {setSelectedType("DOUBLE")}} aria-pressed={selectedType == "DOUBLE"}>DOUBLE</button>
                     <button className="number-button" onClick={() => {setSelectedType("SINGLE")}} aria-pressed={selectedType == "SINGLE"}>SINGLE</button>
