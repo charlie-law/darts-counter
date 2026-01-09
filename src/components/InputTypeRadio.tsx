@@ -8,10 +8,10 @@ export default function InputTypeRadio({ game }: {game: Game}) {
     function handleInput(number: number | null, type: string | null) {
         if (number) {
             let type = selectedType;
-            const points = type == "SINGLE"? number : type == "DOUBLE"? number * 2 : type == "TRIPLE"? number * 3 : 0;
-            const stringPoints = type == "SINGLE"? number : type == "DOUBLE"? `D${number}` : type == "TRIPLE"? `T${number}` : 0;
+            const points = type == null? number : type == "DOUBLE"? number * 2 : type == "TRIPLE"? number * 3 : 0;
+            const stringPoints = type == null? number : type == "DOUBLE"? `D${number}` : type == "TRIPLE"? `T${number}` : 0;
+
             game.addToCurrentScored({[stringPoints as string]: points});
-            console.log(game.currentScored)
             setSelectedType(null);
         } else {
             if (type) {
@@ -78,7 +78,6 @@ export default function InputTypeRadio({ game }: {game: Game}) {
                     <button className="number-button" value={25} onClick={() => {setSelectedType("SB"); handleInput(null, "SB")}} aria-pressed={selectedType == "SB"}>SB</button>
                     <button className="number-button" onClick={() => {setSelectedType("TRIPLE")}} aria-pressed={selectedType == "TRIPLE"}>TRIPLE</button>
                     <button className="number-button" onClick={() => {setSelectedType("DOUBLE")}} aria-pressed={selectedType == "DOUBLE"}>DOUBLE</button>
-                    <button className="number-button" onClick={() => {setSelectedType("SINGLE")}} aria-pressed={selectedType == "SINGLE"}>SINGLE</button>
                 </section>
                 <Numbers />
             </section>
