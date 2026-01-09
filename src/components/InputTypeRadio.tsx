@@ -1,14 +1,29 @@
 import { useState } from "react";
+import Game from "./game";
 
-export default function InputTypeRadio() {
+export default function InputTypeRadio({ game }: {game: Game}) {
     const [selectedInputType, setSelectedInputType] = useState<number>(0);
+    const [currentPoints, setCurrentPoints] = useState<number[]>([]);
     const [selectedType, setSelectedType] = useState<string | null>(null);
+
+    function handleInput(number: number | null) {
+        const type: string | null = selectedType;
+        if (number) {
+            const points = type == "SINGLE"? number : type == "DOUBLE"? number * 2 : type == "TRIPLE"? number * 3 : 0;
+            setCurrentPoints([...currentPoints, points]);
+            game.changeScore(currentPoints);
+        } else {
+            const points = type == "BULLSEYE"? 50 : type == "SB"? 25 : 0;
+            setCurrentPoints([...currentPoints, points]);
+            game.changeScore(currentPoints);
+        };
+    };
 
     function Inputs() {
         if (selectedInputType == 0) {
             return (<DartBoard />);
         } else {
-            return (<NumberInputs />);
+            return (<NumberTypes />);
         };
     };
 
@@ -18,43 +33,45 @@ export default function InputTypeRadio() {
         );
     };
 
-    function Numbers() {
-        const [selectedNumber, setSelectedNumber] = useState<number | null>(null);
+    function NumButton({ num }: { num: number }) {
+        return <button className="number-button" value={num} onClick={() => handleInput(num)}>{num}</button>
+    };
 
+    function Numbers() {
         if (selectedType != "BULLSEYE" && selectedType != "SB") {
             return (
                 <section className="flex-1 flex flex-wrap flex-col gap-2 max-h-160">
-                    <button className="number-button" value={20}>20</button>
-                    <button className="number-button" value={19}>19</button>
-                    <button className="number-button" value={18}>18</button>
-                    <button className="number-button" value={17}>17</button>
-                    <button className="number-button" value={16}>16</button>
-                    <button className="number-button" value={15}>15</button>
-                    <button className="number-button" value={14}>14</button>
-                    <button className="number-button" value={13}>13</button>
-                    <button className="number-button" value={12}>12</button>
-                    <button className="number-button" value={11}>11</button>
-                    <button className="number-button" value={10}>10</button>
-                    <button className="number-button" value={9}>9</button>
-                    <button className="number-button" value={8}>8</button>
-                    <button className="number-button" value={7}>7</button>
-                    <button className="number-button" value={6}>6</button>
-                    <button className="number-button" value={5}>5</button>
-                    <button className="number-button" value={4}>4</button>
-                    <button className="number-button" value={3}>3</button>
-                    <button className="number-button" value={2}>2</button>
-                    <button className="number-button" value={1}>1</button>
+                    <NumButton num={20} />
+                    <NumButton num={19} />
+                    <NumButton num={18} />
+                    <NumButton num={17} />
+                    <NumButton num={16} />
+                    <NumButton num={15} />
+                    <NumButton num={14} />
+                    <NumButton num={13} />
+                    <NumButton num={12} />
+                    <NumButton num={11} />
+                    <NumButton num={10} />
+                    <NumButton num={9} />
+                    <NumButton num={8} />
+                    <NumButton num={7} />
+                    <NumButton num={6} />
+                    <NumButton num={5} />
+                    <NumButton num={4} />
+                    <NumButton num={3} />
+                    <NumButton num={2} />
+                    <NumButton num={1} />
                 </section>
-            )
-        }
+            );
+        };
     }
 
-    function NumberInputs() {
+    function NumberTypes() {
         return (
             <section className="flex w-full gap-4 mt-8">
                 <section className="flex flex-col gap-2 flex-1">
-                    <button className="number-button" value={50} onClick={() => {setSelectedType("BULLSEYE")}} aria-pressed={selectedType == "BULLSEYE"}>BULLSEYE</button>
-                    <button className="number-button" value={25} onClick={() => {setSelectedType("SB")}} aria-pressed={selectedType == "SB"}>SB</button>
+                    <button className="number-button" value={50} onClick={() => {setSelectedType("BULLSEYE"); handleInput(null)}} aria-pressed={selectedType == "BULLSEYE"}>BULLSEYE</button>
+                    <button className="number-button" value={25} onClick={() => {setSelectedType("SB"); handleInput(null)}} aria-pressed={selectedType == "SB"}>SB</button>
                     <button className="number-button" onClick={() => {setSelectedType("TRIPLE")}} aria-pressed={selectedType == "TRIPLE"}>TRIPLE</button>
                     <button className="number-button" onClick={() => {setSelectedType("DOUBLE")}} aria-pressed={selectedType == "DOUBLE"}>DOUBLE</button>
                     <button className="number-button" onClick={() => {setSelectedType("SINGLE")}} aria-pressed={selectedType == "SINGLE"}>SINGLE</button>
@@ -67,9 +84,9 @@ export default function InputTypeRadio() {
     return (
         <section>
             <section className="flex w-full bg-gray-100 border border-gray-400 rounded">
-                <button onClick={() => {setSelectedInputType(0)}} type="button" className="p-2 flex-1 hover:bg-red-100 aria-pressed:bg-red-200 rounded cursor-pointer" aria-pressed={selectedInputType == 0}>Dart Position</button>
+                <button onClick={() => {setSelectedInputType(0)}} type="button" className="p-2 flex-1 hover:bg-red-100 aria-pressed:bg-red-200 rounded cursor-pointer transition duration-250" aria-pressed={selectedInputType == 0}>Dart Position</button>
                 <div className="w-px bg-gray-400 mt-1 mb-1"></div>
-                <button onClick={() => {setSelectedInputType(1)}} type="button" className="p-2 flex-1 hover:bg-red-100 aria-pressed:bg-red-200 rounded cursor-pointer" aria-pressed={selectedInputType == 1}>Numbers</button>
+                <button onClick={() => {setSelectedInputType(1)}} type="button" className="p-2 flex-1 hover:bg-red-100 aria-pressed:bg-red-200 rounded cursor-pointer transition duration-250" aria-pressed={selectedInputType == 1}>Numbers</button>
             </section>
             <Inputs />
         </section>
