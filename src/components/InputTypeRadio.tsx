@@ -85,10 +85,10 @@ export default function InputTypeRadio({ game }: {game: Game}) {
 
     return (
         <section>
-            <section className="flex w-full bg-gray-100 border border-gray-400 rounded">
-                <button onClick={() => {setSelectedInputType(0)}} type="button" className="p-2 flex-1 hover:bg-red-100 aria-pressed:bg-red-200 rounded cursor-pointer transition duration-250" aria-pressed={selectedInputType == 0}>Dart Position</button>
-                <div className="w-px bg-gray-400 mt-1 mb-1"></div>
-                <button onClick={() => {setSelectedInputType(1)}} type="button" className="p-2 flex-1 hover:bg-red-100 aria-pressed:bg-red-200 rounded cursor-pointer transition duration-250" aria-pressed={selectedInputType == 1}>Numbers</button>
+            <section className="flex w-full bg-gray-100 dark:bg-gray-900 border border-gray-400 dark:border-gray-800 rounded">
+                <button onClick={() => {setSelectedInputType(0)}} type="button" className="p-2 flex-1 hover:bg-red-100 dark:hover:bg-red-950/30 aria-pressed:bg-red-200 dark:aria-pressed:bg-red-800/30 rounded cursor-pointer transition duration-250" aria-pressed={selectedInputType == 0}>Dart Position</button>
+                <div className="w-px bg-gray-400 dark:bg-gray-600 mt-1 mb-1"></div>
+                <button onClick={() => {setSelectedInputType(1)}} type="button" className="p-2 flex-1 hover:bg-red-100 dark:hover:bg-red-950/30 aria-pressed:bg-red-200 dark:aria-pressed:bg-red-800/30 rounded cursor-pointer transition duration-250" aria-pressed={selectedInputType == 1}>Numbers</button>
             </section>
             <Inputs />
         </section>
