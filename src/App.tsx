@@ -26,13 +26,13 @@ export default function App() {
                     <section className="flex gap-8">
                         <section className="flex flex-col gap-1 items-center flex-1">
                             <h2 className="text-7xl font-bold">{game.scores[1]}</h2>
-                            <p className="text-gray-500 dark:text-gray-400" id="potential-1"></p>
+                            <p className={game.turn == 1 ? `text-gray-500 dark:text-gray-400` : `text-gray-500 dark:text-gray-400 invisible`} id="potential-1">{game.potentialScores[1]}</p>
                             <p className="text-lg">{game.turn == 1? `💠 ${game.names[1]}` : game.names[1]}</p>
                         </section>
                         <div className="bg-gray-400 dark:bg-gray-600 w-px"></div>
                         <section className="flex flex-col gap-1 items-center flex-1">
                             <h2 className="text-7xl font-bold">{game.scores[2]}</h2>
-                            <p className="text-gray-500" id="potential-2"></p>
+                            <p className={game.turn == 2 ? `text-gray-500 dark:text-gray-400` : `text-gray-500 dark:text-gray-400 invisible`} id="potential-2">{game.potentialScores[2]}</p>
                             <p className="text-lg">{game.turn == 2? `💠 ${game.names[2]}` : game.names[2]}</p>
                         </section>
                     </section>
@@ -67,11 +67,11 @@ export default function App() {
                     <section className="flex gap-2 w-full">
                         <section className="flex flex-1 flex-col items-start gap-1">
                             <label htmlFor="player-1">Player 1</label>
-                            <input type="text" id="player-1" name="player-1" maxLength={40} placeholder="Player 1's Name" className="w-full p-2 border bg-gray-100 dark:bg-gray-800 border-gray-400 dark:border-gray-700 rounded focus:outline-1 focus:outline-red-600" required />
+                            <input type="text" id="player-1" name="player-1" value={"Player 1"} maxLength={40} placeholder="Player 1's Name" className="w-full p-2 border bg-gray-100 dark:bg-gray-800 border-gray-400 dark:border-gray-700 rounded focus:outline-1 focus:outline-red-600" required />
                         </section>
                         <section className="flex flex-1 flex-col items-start gap-1">
                             <label htmlFor="player-2">Player 2</label>
-                            <input type="text" id="player-2" name="player-2" maxLength={40} placeholder="Player 2's Name" className="w-full p-2 border bg-gray-100 dark:bg-gray-800 border-gray-400 dark:border-gray-700 rounded focus:outline-1 focus:outline-red-600" required />
+                            <input type="text" id="player-2" name="player-2" value={"Player 2"} maxLength={40} placeholder="Player 2's Name" className="w-full p-2 border bg-gray-100 dark:bg-gray-800 border-gray-400 dark:border-gray-700 rounded focus:outline-1 focus:outline-red-600" required />
                         </section>
                     </section>
                     <GameTypeRadio />

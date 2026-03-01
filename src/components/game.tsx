@@ -8,6 +8,10 @@ export default class Game {
         1: 0,
         2: 0
     };
+    potentialScores: {[index: number]: number} = {
+        1: 0,
+        2: 0
+    };
     legs: {[index: number]: number} = { // Total games won
         1: 0,
         2: 0
@@ -21,12 +25,14 @@ export default class Game {
         this.names[2] = player2Name;
         this.scores[1] = playerStartScore;
         this.scores[2] = playerStartScore;
+        this.potentialScores[1] = playerStartScore;
+        this.potentialScores[2] = playerStartScore;
         this.turn = 1;
     };
 
     addToCurrentScored(point: {[index: string]: number}) {
-        this.currentScored.push(point);
         const potentialScore = this.calculatePotentialScore();
+        this.currentScored.push(point);
 
         if (this.currentScored.length == 3 || potentialScore <= 1) { // Show confirmation button
             document.querySelector(".confirmation-button")?.classList.remove("hidden");
@@ -38,7 +44,7 @@ export default class Game {
         // Change the values on the page to show the current scored
         document.querySelector(`#current-points-${currentPoint} h4`)!.textContent = Object.keys(point)[0];
         document.querySelector(`#current-points-${currentPoint} p`)!.textContent = String(Object.values(point)[0]);
-        document.querySelector(`#potential-${this.turn}`)!.textContent = String(potentialScore);
+        this.changePotentialScore();
     };
 
     removeFromCurrentScored() {
@@ -53,8 +59,10 @@ export default class Game {
         const currentPoint = (this.currentScored.length);
         document.querySelector(`#current-points-${currentPoint} h4`)!.textContent = "-";
         document.querySelector(`#current-points-${currentPoint} p`)!.textContent = "0";
-
+        
         this.currentScored.pop();
+
+        this.changePotentialScore();
         
         // Check if there is no currently recorded values to remove the back button from view
         if (this.currentScored.length == 0) {
@@ -75,6 +83,10 @@ export default class Game {
         return this.scores[this.turn] - this.calculateTotalCurrentScored();
     }
 
+    changePotentialScore() {
+        document.querySelector(`#potential-${this.turn}`)!.textContent = String(this.calculatePotentialScore());
+    }
+
     changeScore() {
         let totalPoints = this.calculateTotalCurrentScored();
         let potentialScore = this.calculatePotentialScore();
@@ -89,6 +101,8 @@ export default class Game {
         };
 
         this.currentScored = []; // Clear current scores array
+        this.potentialScores[this.turn] = this.scores[this.turn]; // Change potential score to new score
+
         this.turn == 1? this.turn = 2 : this.turn = 1; // Change the turn
     };
 
