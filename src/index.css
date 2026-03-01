@@ -19,7 +19,7 @@
 }
 
 :root.dark {
-    background-color: #11151d;
+    background-color: #0e111b;
     color: #e2e8f0;
 }
 
@@ -47,7 +47,7 @@ body {
 
 .number-button {
     cursor: pointer;
-    padding: 12px;
+    padding: 8px;
     transition: all;
     transition-duration: 250ms;
     border: solid 1px #99a1af;
@@ -57,7 +57,7 @@ body {
 }
 .dark .number-button {
     border: solid 1px oklch(37.3% 0.034 259.733);
-    background-color: oklch(27.8% 0.033 256.848);
+    background-color: oklch(21% 0.034 264.665);
 }
 
 .number-button:hover {
@@ -68,7 +68,7 @@ body {
 
 .dark .number-button:hover {
     border: solid 1px oklch(63.7% 0.237 25.331);
-    background-color: oklch(25.8% 0.092 26.042);
+    background-color: oklch(25.747% 0.09177 25.826 / 0.2);
     color: oklch(57.7% 0.245 27.325);
 }
 
@@ -80,6 +80,6 @@ body {
 
 .dark .number-button[aria-pressed="true"] {
     border: solid 1px oklch(57.7% 0.245 27.325);
-    background-color: oklch(39.6% 0.141 25.723);
+    background-color: oklch(25.8% 0.092 26.042 / 0.7);
     color: oklch(80.8% 0.114 19.571);
 }

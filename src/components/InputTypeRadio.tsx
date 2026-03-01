@@ -43,7 +43,7 @@ export default function InputTypeRadio({ game }: {game: Game}) {
 
     function Numbers() {
         return (
-            <section className="flex-1 flex flex-wrap flex-col gap-2 max-h-160">
+            <section className="flex-1 flex flex-wrap flex-col gap-2 max-h-140">
                 <NumButton num={20} />
                 <NumButton num={19} />
                 <NumButton num={18} />
