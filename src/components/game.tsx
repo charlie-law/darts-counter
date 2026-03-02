@@ -31,8 +31,8 @@ export default class Game {
     };
 
     addToCurrentScored(point: {[index: string]: number}) {
-        const potentialScore = this.calculatePotentialScore();
         this.currentScored.push(point);
+        const potentialScore = this.calculatePotentialScore();
 
         if (this.currentScored.length == 3 || potentialScore <= 1) { // Show confirmation button
             document.querySelector(".confirmation-button")?.classList.remove("hidden");
@@ -109,6 +109,8 @@ export default class Game {
     resetGame(prevWinner: number) {
         this.scores[1] = this.playerStartScore;
         this.scores[2] = this.playerStartScore;
+        this.potentialScores[1] = this.playerStartScore;
+        this.potentialScores[2] = this.playerStartScore;
         this.turn = prevWinner;
     };
 };
