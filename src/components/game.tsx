@@ -58,7 +58,7 @@ export default class Game {
         // Edit values on the page
         const currentPoint = (this.currentScored.length);
         document.querySelector(`#current-points-${currentPoint} h4`)!.textContent = "-";
-        document.querySelector(`#current-points-${currentPoint} p`)!.textContent = "0";
+        document.querySelector(`#current-points-${currentPoint} p`)!.textContent = "";
         
         this.currentScored.pop();
 

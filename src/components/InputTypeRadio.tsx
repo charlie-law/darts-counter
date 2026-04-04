@@ -32,10 +32,24 @@ export default function InputTypeRadio({ game }: {game: Game}) {
     };
 
     function DartBoard() {
+        /*const backgroundColour = "oklch(21% 0.034 264.665)";
+        const strokeColour = "oklch(37.3% 0.034 259.733)";
+        const redColour = "oklch(44.4% 0.177 26.899)";
+        const greenColour = "oklch(52.7% 0.154 150.069)";
         return (
-            <p>Dart Board</p>
-        );
-    };
+            <section>
+                <svg className="w-full aspect-square">
+                    <circle r={220} cx={235} cy={235} fill={backgroundColour} stroke={strokeColour}></circle>
+                    <circle r={30} cx={235} cy={235} stroke={strokeColour} fill={greenColour}></circle>
+                    <circle r={15} cx={235} cy={235} stroke={strokeColour} fill={redColour}></circle>
+                </svg>
+                <button className="number-button w-full" onClick={() => {setSelectedType("MISS"); handleInput(0, "MISS")}} aria-pressed={selectedType == "MISS"}>MISS</button>
+            </section>
+        )*/
+       return (
+            <p>not done</p>
+       )
+    }
 
     function NumButton({ num }: { num: number }) {
         return <button className="number-button" value={num} onClick={() => handleInput(num, null)}>{num}</button>

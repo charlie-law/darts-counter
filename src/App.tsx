@@ -22,7 +22,7 @@ export default function App() {
     function AppContent() {
         if (gameActive) {
             return (
-                <section className="flex flex-col gap-16">
+                <section className="flex flex-col gap-5">
                     <section className="flex gap-8">
                         <section className="flex flex-col gap-1 items-center flex-1">
                             <h2 className="text-7xl font-bold">{game.scores[1]}</h2>
@@ -38,18 +38,18 @@ export default function App() {
                     </section>
                     <section className="flex flex-col gap-4 items-center">
                         <h3>CURRENT SCORE</h3>
-                        <section className="flex gap-8 w-full">
+                        <section className="flex gap-8 w-full h-[98.5px]">
                             <section className="bg-gray-50 dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-800 p-4 flex-1" id="current-points-1">
                                 <h4 className="font-semibold text-3xl">-</h4>
-                                <p className="text-xl">0</p>
+                                <p className="text-xl"></p>
                             </section>
                             <section className="bg-gray-50 dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-800 p-4 flex-1" id="current-points-2">
                                 <h4 className="font-semibold text-3xl">-</h4>
-                                <p className="text-xl">0</p>
+                                <p className="text-xl"></p>
                             </section>
                             <section className="bg-gray-50 dark:bg-gray-900 rounded border border-gray-200 dark:border-gray-800 p-4 flex-1" id="current-points-3">
                                 <h4 className="font-semibold text-3xl">-</h4>
-                                <p className="text-xl">0</p>
+                                <p className="text-xl"></p>
                             </section>
                         </section>
                         <section className="flex gap-2">
